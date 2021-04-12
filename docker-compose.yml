@@ -1,0 +1,26 @@
+version: '2.4'
+services:
+  chargeGroupsService:
+    image: antonupolnikov/greenflux-assignment
+    platform: linux
+    ports: 
+      - "5000:80"
+    networks: 
+      - bridge_network
+
+  sqlServer:
+    image: mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
+    platform: linux
+    ports:
+      - "1433:1433"
+    environment:
+        ACCEPT_EULA: "Y"
+        SA_PASSWORD: "randomPassword2021!"
+    networks: 
+      - bridge_network
+
+networks:
+  bridge_network:
+      driver: bridge
+      driver_opts:
+        com.docker.network.enable_ipv6: "false"
